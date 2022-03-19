@@ -1,7 +1,57 @@
+.container-fluid{
+   background-image: url(./image/img-prueba-acreditacion.jpg);
+   background-repeat: repeat-x;
+   background-attachment: fixed;
+   width: 100%;
+   height: 100%;
+
+}
+
 .hidden{
     display: none;
 }
 
 .show{
     display: block;
+}
+
+.cantidadPrimos{
+    word-wrap: break-word;
+}
+
+.btnTamanoPrimos{
+    margin: 5px 5px;
+}
+
+.propisicion_titulo{
+    padding-top: 30px;
+    color: rgb(216, 57, 57);    
+}
+
+.parrafo_explicacion{
+    padding-top: 30px;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.objetivo{
+    color:rgb(216, 57, 57);
+}
+
+.parrafo_dos_explicacion{
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.campo{
+    font-weight: 700;
+}
+
+.realizado{
+    font-weight: 700;
+}
+
+.nombres{
+    font-weight: 600;
+    text-decoration: underline;
 }

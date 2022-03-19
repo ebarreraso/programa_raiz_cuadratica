@@ -1,84 +1,79 @@
 'use strict'
 
-// function calcular(){
-//     let a = document.getElementById("valorA").value;
-//     let b = document.getElementById("ValorB").value;
-//     let c = document.getElementById("ValorC").value;
-
-//     let operacion = Math.pow(b,2)-4*a*c;
-//     let p,q,x1,x2;
-
-//     if(operacion<0){
-//         alert("Sin raiz real");
-//     }else{
-//         p = -b/(2*a);
-//         q = Math.sqrt(operacion)/(2*a);
-//         x1 = p+q;
-//         x2 = p-q;
-//         document.write("Las dos raíces son:" + x1 + "," + x2);
-
-//         console.log(p);
-//         console.log(q);
-//         console.log(x1);
-//         console.log(x2);
-//     }
-// }
-
-let numeros = [];
-let numerosPrimos = [];
-let totalPrimosCreados = [];
-let numeroPrimo;
-let cantidadPrimos;
-
-
 function calcularPrimos(){
 
-    for(let i=2; i<1000; i++){
-        numeros = [i];
+    document.getElementById('esPrimo').innerHTML = "";
+    document.getElementById('posicionNumero').innerHTML = "";
+    document.getElementById('multiXDigi').innerHTML = "";
+    document.getElementById('condicion').innerHTML = "";
+
+    //Valor ingresado por el usuario
+    let numeroIngresado = document.getElementById('arrayPri').value;
+
+    if(esPrimo(numeroIngresado)){
+        document.getElementById('esPrimo').innerHTML = `<strong>El número ingresado ${numeroIngresado}: Es un numero primo</strong>`;
+        document.getElementById('posicionNumero').innerHTML = `<strong>Posición del número ingresado dentro de los primos:  ${posicionEnPrimos(numeroIngresado)}</strong>`;
+        document.getElementById('multiXDigi').innerHTML = `<strong>El producto de los números: ${separarNumero(numeroIngresado)}es: ${multiplicacionInterna(numeroIngresado)}</strong>`;
+        document.getElementById('condicion').innerHTML = `<strong>El número primo Ingresado${numeroIngresado} ${condicion(numeroIngresado)}</strong>`;
+
+        
+     
+    }else{
+        document.getElementById('esPrimo').innerHTML = `<strong>El número ingresado ${numeroIngresado}: NO es un numero primo </strong>`;
     }
-    cantidadPrimos = document.getElementById('arrayPri').value;
-    
-     //crea la cantida de primos que se requiera
-     for(let o=0; o<cantidadPrimos; o++){
-        if(validaPrimos(o)){
-            totalPrimosCreados.push(o);
+
+}
+
+function esPrimo(numero) {
+
+    let esPrimo = true;
+    for(let i=(numero-1); i>=2; i--){
+        if(numero % i === 0){
+            esPrimo = false;
+        }
+    }
+    return esPrimo;
+}  
+
+
+function posicionEnPrimos(numero) {
+
+    let primos = [];
+    for(let i=2; i<=numero; i++){
+        if(esPrimo(i)){
+            primos.push(i);
         }
     }
 
-    //Pone la clase si no la tiene y la quita si lo tiene
-    document.getElementById('tamanoPrimos').classList.toggle('hidden');
-    document.getElementById('btnTamanoPrimos').classList.toggle('hidden');
-    document.getElementById('numeroEspecial').classList.toggle('hidden');
-    document.getElementById('buscarEspecial').classList.toggle('hidden');
-    document.getElementById('cantidadPrimos').classList.toggle('hidden');
-    document.getElementById('cantidadPrimos').innerHTML = `numeros primos resultanes de el valor ingresado ${cantidadPrimos} <br> ${totalPrimosCreados}`;
-}
+    return primos.length;
+}  
 
-function buscarNumEspecial(){
+function multiplicacionInterna(numero) {
 
-    let numeroUnico = document.getElementById("numSpecial").value;
-
-   
-
-   let j = totalPrimosCreados.find(c => c == numeroUnico);
-
-    console.log(j);
-
-    
-
-    // if(validaPrimos(numeroUnico)){
-    //     numerosPrimos.push(numeroUnico);
-    //     console.log(numerosPrimos);
-    // }
-
-    // document.getElementById('listaPrimos').innerHTML = `${numerosPrimos}`;
-}
-
-function validaPrimos(numero){
-    for(let j = 2; j<numeros; j++){
-        if(numero % j === 0){
-            return false;
-        }
-        return numero !== 1;
+    let resultado = 1;
+    let numeros = numero.split("");
+    for(let num of numeros){
+        resultado = resultado * num;
     }
+
+    return resultado;
+} 
+
+function separarNumero(numero){
+    let numeroSeparado =  numero.split("");
+    return numeroSeparado;
 }
+
+function condicion(numero){
+    let resultadoConjetura = "";
+    let numeSeparados = separarNumero(numero);
+    let posicionNumero = posicionEnPrimos(numero);
+    
+    if(numeSeparados[0] * numeSeparados[1] == posicionNumero){
+        return resultadoConjetura = "Cumple con la conjetura";
+    }else{
+        return resultadoConjetura = "No cumple con la conjetura";
+    }
+
+}
+
